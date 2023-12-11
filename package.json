@@ -7,7 +7,7 @@
 		"lint:php": "composer run-script lint",
 		"lint-fix:php": "composer run-script lint-fix",
 		"prezip": "rm -rf custom-plugin.zip",
-		"zip": "zip -r vhc-wc-catalog-visibility-options.zip ./*.php assets includes languages templates woo-includes -x '**/.DS_Store'",
+		"zip": "zip -r vhc-wc-catalog-visibility-options.zip ./*.php includes languages templates woo-includes -x '**/.DS_Store'",
 		"makepot": "wp i18n make-pot . --exclude=\"node_modules,vendor\" --slug=vhc-wc-cvo"
 	},
 	"repository": {
