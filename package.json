@@ -1,0 +1,23 @@
+{
+	"name": "vhc-wc-catalog-visibility-options",
+	"version": "1.0.0",
+	"description": "Provides the ability to hide prices, or show prices only to authenticated users. Provides the ability to disable e-commerce functionality by disabling the cart.",
+	"scripts": {
+		"dev": "gulp watch",
+		"lint:php": "composer run-script lint",
+		"lint-fix:php": "composer run-script lint-fix",
+		"prezip": "rm -rf custom-plugin.zip",
+		"zip": "zip -r vhc-wc-catalog-visibility-options.zip ./*.php assets includes languages templates woo-includes -x '**/.DS_Store'",
+		"makepot": "wp i18n make-pot . --exclude=\"node_modules,vendor\" --slug=vhc-wc-cvo"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/vijayhardaha/vhc-wc-catalog-visibility-options.git"
+	},
+	"license": "GPLv2+",
+	"author": "Vijay Hardaha <https://twitter.com/vijayhardaha>",
+	"bugs": {
+		"url": "https://github.com/vijayhardaha/vhc-wc-catalog-visibility-options/issues"
+	},
+	"homepage": "https://github.com/vijayhardaha/vhc-wc-catalog-visibility-options#readme"
+}
