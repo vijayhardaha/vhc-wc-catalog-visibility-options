@@ -73,8 +73,6 @@ if ( vhc_wc_cvo_is_woocommerce_active() ) {
 		 * Constructor.
 		 */
 		public function __construct() {
-            // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-			$this->current_tab   = ( isset( $_GET['tab'] ) ) ? sanitize_key( $_GET['tab'] ) : 'general';
 			$this->settings_tabs = array(
 				'visibility_options' => __( 'Visibility Options', 'vhc-wc-cvo' ),
 			);
