@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv2+.
 msgid ""
 msgstr ""
-"Project-Id-Version: VHC WooCommerce Catalog Visibility Options 1.0.0\n"
+"Project-Id-Version: VHC WooCommerce Catalog Visibility Options 1.0.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/vhc-wc-cvo\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-12-11T04:24:25+00:00\n"
+"POT-Creation-Date: 2023-12-12T04:59:43+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.9.0\n"
 "X-Domain: vhc-wc-cvo\n"
@@ -34,31 +34,31 @@ msgstr ""
 msgid "https://twitter.com/vijayhardaha/"
 msgstr ""
 
-#: vhc-wc-catalog-visibility-options.php:44
-#: vhc-wc-catalog-visibility-options.php:67
+#: vhc-wc-catalog-visibility-options.php:77
+#: vhc-wc-catalog-visibility-options.php:100
 msgid "Visibility Options"
 msgstr ""
 
-#: vhc-wc-catalog-visibility-options.php:131
+#: vhc-wc-catalog-visibility-options.php:164
 msgid "Shopping"
 msgstr ""
 
-#: vhc-wc-catalog-visibility-options.php:137
+#: vhc-wc-catalog-visibility-options.php:170
 msgid "Purchases"
 msgstr ""
 
-#: vhc-wc-catalog-visibility-options.php:150
+#: vhc-wc-catalog-visibility-options.php:183
 msgid "Prices"
 msgstr ""
 
-#: vhc-wc-catalog-visibility-options.php:163
+#: vhc-wc-catalog-visibility-options.php:196
 msgid "Catalog Add to Cart Button Text"
 msgstr ""
 
-#: vhc-wc-catalog-visibility-options.php:171
+#: vhc-wc-catalog-visibility-options.php:204
 msgid "Catalog Price Text"
 msgstr ""
 
-#: vhc-wc-catalog-visibility-options.php:179
+#: vhc-wc-catalog-visibility-options.php:212
 msgid "Alternate Content"
 msgstr ""
