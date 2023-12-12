@@ -1,6 +1,6 @@
 {
 	"name": "vhc-wc-catalog-visibility-options",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "Provides the ability to hide prices, or show prices only to authenticated users. Provides the ability to disable e-commerce functionality by disabling the cart.",
 	"scripts": {
 		"dev": "gulp watch",
