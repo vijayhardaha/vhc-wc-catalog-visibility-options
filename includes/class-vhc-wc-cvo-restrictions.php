@@ -7,6 +7,8 @@
  * @package VHC_WC_CVO_Options
  */
 
+defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
+
 if ( ! class_exists( 'VHC_WC_CVO_Restrictions' ) ) {
 
 	/**
@@ -52,78 +54,50 @@ if ( ! class_exists( 'VHC_WC_CVO_Restrictions' ) ) {
 		 * Constructor.
 		 */
 		public function __construct() {
+			require 'class-vhc-wc-cvo-restrictions-transient.php';
+
 			// Initializes actions based on certain conditions.
 			if ( ! ( is_admin() && ! defined( 'DOING_AJAX' ) ) && ! defined( 'DOING_CRON' ) ) {
 				add_action( 'woocommerce_init', array( $this, 'on_init' ), 0 );
 			}
 
 			// Sets up hooks to clear transients in various scenarios.
-			add_action( 'save_post', array( $this, 'clear_transients' ) );
+			add_action( 'save_post', array( $this, 'clear_transients_on_save_product' ) );
 
 			// Clears session transients upon certain user actions.
-			add_action( 'user_register', array( $this, 'clear_session_transients' ) );
-			add_action( 'wp_login', array( $this, 'clear_session_transients' ) );
-			add_action( 'wp_logout', array( $this, 'clear_session_transients' ) );
+			add_action( 'user_register', array( $this, 'clear_transients' ) );
+			add_action( 'wp_login', array( $this, 'clear_transients' ) );
+			add_action( 'wp_logout', array( $this, 'clear_transients' ) );
+		}
+
+		/**
+		 * Clear transients associated with products when a product is saved.
+		 *
+		 * This method checks the count of transient clears and clears transients
+		 * associated with WooCommerce products if the count is within the defined limit.
+		 *
+		 * @param int $post_id The ID of the post being saved.
+		 */
+		public function clear_transients_on_save_product( $post_id ) {
+			// Check if the transient clear count is within the defined limit.
+			if ( self::$transient_clear_count < self::$max_transient_clear_count ) {
+				// Get the post type of the saved post.
+				$post_type = get_post_type( $post_id );
+
+				// Check if the post type is 'product' (WooCommerce product).
+				if ( 'product' === $post_type ) {
+					// Note - Calling this function will increment the transient clear count.
+					$this->clear_transients();
+					self::$transient_clear_count++; // Increments the transient clear count.
+				}
+			}
 		}
 
 		/**
 		 * Clears transients based on specific patterns in the option_name.
-		 *
-		 * @global wpdb $wpdb WordPress database access abstraction object.
 		 */
 		public function clear_transients() {
-			global $wpdb;
-
-			// Checks if the transient clear count is less than the maximum allowed.
-			if ( self::$transient_clear_count < self::$max_transient_clear_count ) {
-				// Deletes options from the database matching specific patterns related to transients.
-				// phpcs:disable WordPress.DB.DirectDatabaseQuery
-				$wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE '_transient_wc_related%'" );
-				$wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE '_transient_wc_loop%'" );
-				$wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE '_transient_wc_product_loop%'" );
-				$wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE '_transient_product_query%'" );
-
-				$wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE '_transient_twccr%'" );
-				$wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE '_transient_timeout_twccr%'" );
-				// phpcs:enable WordPress.DB.DirectDatabaseQuery
-
-				// Flushes the cache to ensure consistency after deleting transients.
-				wp_cache_flush();
-				self::$transient_clear_count++; // Increments the transient clear count.
-			}
-		}
-
-		/**
-		 * Clears session-related transients.
-		 *
-		 * @global wpdb $wpdb WordPress database access abstraction object.
-		 */
-		public function clear_session_transients() {
-			global $wpdb;
-
-			// Deletes session-related options from the database based on specific patterns in the option_name.
-			// phpcs:disable WordPress.DB.DirectDatabaseQuery
-			$wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE '_transient_wc_loop%'" );
-			$wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE '_transient_wc_product_loop%'" );
-			$wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE '_transient_product_query%'" );
-			$wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE '_transient_twccr%'" );
-			$wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE '_transient_timeout_twccr%'" );
-
-			$session = WC()->session;
-
-			// Checks and handles the session data if WooCommerce session is set.
-			if ( isset( $session ) ) {
-				$session_id = WC()->session->get_customer_id();
-
-				// Deletes session-related options associated with the current session ID.
-				// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
-				$wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE '_transient_twccr_" . $session_id . "%'" );
-				// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
-				$wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE '_transient_timeout_twccr_" . $session_id . "%'" );
-
-				wp_cache_flush(); // Flushes the cache to ensure consistency after deleting session-related transients.
-			}
-			// phpcs:enable WordPress.DB.DirectDatabaseQuery
+			VHC_WC_CVO_Restrictions_Transient::queue_delete_transients();
 		}
 
 		/**
