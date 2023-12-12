@@ -12,17 +12,45 @@
  * Domain Path: /languages/
  * Requires at least: 5.8
  * Requires PHP: 7.0
- * Tested up to: 6.0
+ * Tested up to: 6.3
  *
  * @package VHC_WC_CVO_Options
  */
 
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
-require_once 'woo-includes/woo-functions.php';
+/**
+ * Checks if WooCommerce is active.
+ *
+ * @return bool Returns true if WooCommerce is active; otherwise, false.
+ */
+function vhc_wc_cvo_is_woocommerce_active(): bool {
+	// Path to the WooCommerce plugin file.
+	$plugin_path = trailingslashit( WP_PLUGIN_DIR ) . 'woocommerce/woocommerce.php';
 
-if ( is_woocommerce_active() ) {
+	// Check if WooCommerce plugin file exists in active plugins or network activated plugins.
+	if (
+		in_array( $plugin_path, wp_get_active_and_valid_plugins(), true )
+		|| in_array( $plugin_path, wp_get_active_network_plugins(), true )
+	) {
+		return true; // WooCommerce is active.
+	}
+
+	return false; // WooCommerce is not active.
+}
+
+if ( vhc_wc_cvo_is_woocommerce_active() ) {
 	load_plugin_textdomain( 'vhc-wc-cvo', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
+
+	// Declare support for features.
+	add_action(
+		'before_woocommerce_init',
+		function () {
+			if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
+				\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', __FILE__, true );
+			}
+		}
+	);
 
 	// Initialize the Catalog Restrictions included plugin.
 	require 'includes/class-vhc-wc-cvo-restrictions.php';
@@ -33,6 +61,13 @@ if ( is_woocommerce_active() ) {
 	 * Class handling WooCommerce Catalog Visibility Options.
 	 */
 	class VHC_WC_CVO_Options {
+
+		/**
+		 * Array holding settings tabs.
+		 *
+		 * @var array $settings_tabs Holds various tabs for settings.
+		 */
+		private $settings_tabs;
 
 		/**
 		 * Constructor.
