@@ -74,7 +74,7 @@ if ( vhc_wc_cvo_is_woocommerce_active() ) {
 		 */
 		public function __construct() {
 			$this->settings_tabs = array(
-				'visibility_options' => __( 'Visibility Options', 'vhc-wc-cvo' ),
+				'vhc_visibility_options' => __( 'Visibility Options', 'vhc-wc-cvo' ),
 			);
 
 			add_filter( 'woocommerce_settings_tabs_array', array( $this, 'on_add_tab_array' ), 50 );
@@ -86,7 +86,7 @@ if ( vhc_wc_cvo_is_woocommerce_active() ) {
 			}
 
 			// Add the settings fields to each tab.
-			add_action( 'woocommerce_visibility_options_settings', array( $this, 'add_settings_fields' ), 10 );
+			add_action( 'woocommerce_vhc_visibility_options_settings', array( $this, 'add_settings_fields' ), 10 );
 			add_action( 'woocommerce_admin_field_tinyeditor', array( $this, 'on_editor_field' ) );
 		}
 
@@ -97,7 +97,7 @@ if ( vhc_wc_cvo_is_woocommerce_active() ) {
 		 * @return array
 		 */
 		public function on_add_tab_array( $settings_tabs ) {
-			$settings_tabs['visibility_options'] = __( 'Visibility Options', 'vhc-wc-cvo' );
+			$settings_tabs['vhc_visibility_options'] = __( 'Visibility Options', 'vhc-wc-cvo' );
 			return $settings_tabs;
 		}
 
@@ -113,7 +113,7 @@ if ( vhc_wc_cvo_is_woocommerce_active() ) {
 			$current_tab = $this->get_tab_in_view( current_filter(), 'woocommerce_settings_tabs_' );
 
 			// Trigger an action for visibility options settings.
-			do_action( 'woocommerce_visibility_options_settings' );
+			do_action( 'woocommerce_vhc_visibility_options_settings' );
 
 			// Display settings specific to the current tab.
 			woocommerce_admin_fields( $woocommerce_settings[ $current_tab ] );
@@ -158,7 +158,7 @@ if ( vhc_wc_cvo_is_woocommerce_active() ) {
 		private function init_form_fields() {
 			// Define form fields for visibility options.
 			$v1 = apply_filters(
-				'woocommerce_visibility_options_settings_fields',
+				'woocommerce_vhc_visibility_options_settings_fields',
 				array(
 					array(
 						'name' => __( 'Shopping', 'vhc-wc-cvo' ),
@@ -221,7 +221,7 @@ if ( vhc_wc_cvo_is_woocommerce_active() ) {
 				)
 			);
 
-			$this->fields['visibility_options'] = $v1;
+			$this->fields['vhc_visibility_options'] = $v1;
 		}
 
 		/**
