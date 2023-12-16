@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-12-12T04:59:43+00:00\n"
+"POT-Creation-Date: 2023-12-16T05:08:02+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.9.0\n"
 "X-Domain: vhc-wc-cvo\n"
@@ -34,31 +34,35 @@ msgstr ""
 msgid "https://twitter.com/vijayhardaha/"
 msgstr ""
 
-#: vhc-wc-catalog-visibility-options.php:77
-#: vhc-wc-catalog-visibility-options.php:100
+#: vhc-wc-catalog-visibility-options.php:79
+#: vhc-wc-catalog-visibility-options.php:102
 msgid "Visibility Options"
 msgstr ""
 
-#: vhc-wc-catalog-visibility-options.php:164
+#: vhc-wc-catalog-visibility-options.php:166
 msgid "Shopping"
 msgstr ""
 
-#: vhc-wc-catalog-visibility-options.php:170
+#: vhc-wc-catalog-visibility-options.php:172
 msgid "Purchases"
 msgstr ""
 
-#: vhc-wc-catalog-visibility-options.php:183
+#: vhc-wc-catalog-visibility-options.php:185
 msgid "Prices"
 msgstr ""
 
-#: vhc-wc-catalog-visibility-options.php:196
+#: vhc-wc-catalog-visibility-options.php:198
 msgid "Catalog Add to Cart Button Text"
 msgstr ""
 
-#: vhc-wc-catalog-visibility-options.php:204
+#: vhc-wc-catalog-visibility-options.php:206
 msgid "Catalog Price Text"
 msgstr ""
 
-#: vhc-wc-catalog-visibility-options.php:212
+#: vhc-wc-catalog-visibility-options.php:214
 msgid "Alternate Content"
+msgstr ""
+
+#: vhc-wc-catalog-visibility-options.php:305
+msgid "Settings"
 msgstr ""
