@@ -73,6 +73,8 @@ if ( vhc_wc_cvo_is_woocommerce_active() ) {
 		 * Constructor.
 		 */
 		public function __construct() {
+			add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( $this, 'plugin_action_links' ) );
+
 			$this->settings_tabs = array(
 				'vhc_visibility_options' => __( 'Visibility Options', 'vhc-wc-cvo' ),
 			);
@@ -288,6 +290,22 @@ if ( vhc_wc_cvo_is_woocommerce_active() ) {
 		 */
 		public function plugin_dir() {
 			return plugin_dir_path( __FILE__ );
+		}
+
+		/**
+		 * Adds custom action links to the plugin settings in the plugin list view.
+		 *
+		 * @param array $links An array of action links.
+		 * @return array Modified array of action links.
+		 */
+		public function plugin_action_links( $links ) {
+			// Prepend the settings link to the action links array.
+			array_unshift(
+				$links,
+				'<a href="' . admin_url( 'admin.php?page=wc-settings&tab=vhc_visibility_options' ) . '">' . __( 'Settings', 'vhc-wc-cvo' ) . '</a>'
+			);
+
+			return $links;
 		}
 	}
 
