@@ -3,10 +3,9 @@
 	"version": "1.0.1",
 	"description": "Provides the ability to hide prices, or show prices only to authenticated users. Provides the ability to disable e-commerce functionality by disabling the cart.",
 	"scripts": {
-		"dev": "gulp watch",
-		"lint:php": "composer run-script lint",
-		"lint-fix:php": "composer run-script lint-fix",
-		"prezip": "rm -rf custom-plugin.zip",
+		"lint": "composer run-script lint",
+		"fix": "composer run-script lint-fix",
+		"prezip": "rm -rf vhc-wc-catalog-visibility-options.zip",
 		"zip": "zip -r vhc-wc-catalog-visibility-options.zip ./*.php includes languages templates -x '**/.DS_Store'",
 		"makepot": "wp i18n make-pot . --exclude=\"node_modules,vendor\" --slug=vhc-wc-cvo"
 	},
