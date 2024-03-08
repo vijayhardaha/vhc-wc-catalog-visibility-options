@@ -1,6 +1,6 @@
 {
 	"name": "vhc-wc-catalog-visibility-options",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"description": "Provides the ability to hide prices, or show prices only to authenticated users. Provides the ability to disable e-commerce functionality by disabling the cart.",
 	"scripts": {
 		"lint": "composer run-script lint",

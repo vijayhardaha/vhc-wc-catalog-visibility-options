@@ -3,7 +3,7 @@
  * Plugin Name: VHC WooCommerce Catalog Visibility Options
  * Plugin URI: https://github.com/vijayhardaha/vhc-wc-catalog-visibility-options
  * Description: Provides the ability to hide prices, or show prices only to authenticated users. Provides the ability to disable e-commerce functionality by disabling the cart.
- * Version: 1.0.2
+ * Version: 1.0.3
  * Author: Vijay Hardaha
  * Author URI: https://twitter.com/vijayhardaha/
  * License: GPLv2+
@@ -55,7 +55,7 @@ if ( vhc_wc_cvo_is_woocommerce_active() ) {
 	// Initialize the Catalog Restrictions included plugin.
 	require 'includes/class-vhc-wc-cvo-restrictions.php';
 
-	define( 'VHC_WC_CVO_OPTIONS_VERSION', '1.0.2' );
+	define( 'VHC_WC_CVO_OPTIONS_VERSION', '1.0.3' );
 
 	/**
 	 * Class handling WooCommerce Catalog Visibility Options.
