@@ -7,32 +7,23 @@
 root = true
 
 [*]
-# Set the character set to UTF-8.
-charset = utf-8
-# Use LF (linefeed) for line endings.
-end_of_line = lf
-# Indentation size is 4 spaces.
-indent_size = 4
-# Tab width is 4 spaces.
-tab_width = 4
-# Use tabs for indentation.
-indent_style = tab
-# Insert a final newline at the end of the file.
-insert_final_newline = true
-# Trim trailing whitespace at the end of lines.
-trim_trailing_whitespace = true
+charset = utf-8                           # Set the character set to UTF-8.
+end_of_line = lf                          # Use LF (linefeed) for line endings.
+indent_size = 4                           # Indentation size is 4 spaces.
+indent_style = tab                        # Use tabs for indentation.
+insert_final_newline = true               # Insert a final newline at the end of the file.
+trim_trailing_whitespace = true           # Trim trailing whitespace at the end of lines.
 
 [*.txt]
-# Disable trimming trailing whitespace for .txt files.
-trim_trailing_whitespace = false
+trim_trailing_whitespace = false          # Disable trimming trailing whitespace for .txt files.
 
 [*.{md,json,yml}]
-# Disable trimming trailing whitespace and use spaces for indentation for specific file types.
-trim_trailing_whitespace = false
-indent_style = space
-indent_size = 2
-tab_width = 2
+trim_trailing_whitespace = false          # Disable trimming trailing whitespace and use spaces for indentation for specific file types.
+indent_style = space                      # Use spaces for indentation.
+indent_size = 2                           # Indentation size is 2 spaces.
 
 [*.json]
-# Use tabs for indentation specifically for .json files.
-indent_style = tab
+indent_style = tab                        # Use tabs for indentation specifically for .json files.
+
+[*.{js,jsx,ts,tsx}]
+indent_size = 2                           # Set indent size to 2 for js, jsx, ts, tsx files.
