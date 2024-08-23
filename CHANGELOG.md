@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## Version 1.0.4 - Aug 23, 2024
+
+- Bump dev dependencies to the latest versions.
+- Fix the single product form visibility conflict.
+
 ## Version 1.0.3 - Mar 08, 2024
 
 - Bump dev dependencies to the latest versions.

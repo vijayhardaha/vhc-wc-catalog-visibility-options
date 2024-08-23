@@ -3,7 +3,7 @@
  * Plugin Name: VHC WooCommerce Catalog Visibility Options
  * Plugin URI: https://github.com/vijayhardaha/vhc-wc-catalog-visibility-options
  * Description: Provides the ability to hide prices, or show prices only to authenticated users. Provides the ability to disable e-commerce functionality by disabling the cart.
- * Version: 1.0.3
+ * Version: 1.0.4
  * Author: Vijay Hardaha
  * Author URI: https://twitter.com/vijayhardaha/
  * License: GPLv2+
