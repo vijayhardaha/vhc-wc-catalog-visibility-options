@@ -84,7 +84,7 @@ class VHC_WC_CVO_Restrictions_Filters {
 		// Actions on Single Product.
 		add_action( 'woocommerce_after_single_product', array( $this, 'on_woocommerce_after_single_product_bind' ), 9 );
 		add_action( 'woocommerce_after_single_product', array( $this, 'on_woocommerce_after_single_product_unbind' ), 11 );
-		add_action( 'woocommerce_after_add_to_cart_form', array( $this, 'on_after_add_to_cart_form' ), 0 );
+		add_action( 'woocommerce_after_add_to_cart_form', array( $this, 'handle_product_paypal_button' ), 0 );
 
 		// Late Binding and Compatibility.
 		add_action( 'woocommerce_init', array( $this, 'bind_filters_late' ), 99 );
@@ -109,8 +109,8 @@ class VHC_WC_CVO_Restrictions_Filters {
 		add_action( 'woocommerce_before_single_variation', array( $this, 'on_before_single_variation' ), 0 );
 		add_action( 'woocommerce_after_single_variation', array( $this, 'on_after_single_variation' ), 998 );
 
-		add_action( 'woocommerce_before_add_to_cart_button', array( $this, 'on_before_add_to_cart_button' ), 0 );
-		add_action( 'woocommerce_after_add_to_cart_button', array( $this, 'on_after_add_to_cart_button' ), 998 );
+		add_action( 'woocommerce_before_add_to_cart_form', array( $this, 'on_before_add_to_cart_form' ), 0 );
+		add_action( 'woocommerce_after_add_to_cart_form', array( $this, 'on_after_add_to_cart_form' ), 998 );
 	}
 
 	/**
@@ -131,7 +131,7 @@ class VHC_WC_CVO_Restrictions_Filters {
 	/**
 	 * Function to handle actions after the add to cart form.
 	 */
-	public function on_after_add_to_cart_form() {
+	public function handle_product_paypal_button() {
 		global $product;
 
 		// Paypal Express Handling.
@@ -397,18 +397,18 @@ class VHC_WC_CVO_Restrictions_Filters {
 	}
 
 	/**
-	 * Removes actions and calls `on_before_add_to_cart_button` before displaying a single variation.
+	 * Removes actions and calls `on_before_add_to_cart_form` before displaying a single variation.
 	 */
 	public function on_before_single_variation() {
-		remove_action( 'woocommerce_before_add_to_cart_button', array( $this, 'on_before_add_to_cart_button' ), 0 );
-		remove_action( 'woocommerce_after_add_to_cart_button', array( $this, 'on_after_add_to_cart_button' ), 998 );
-		$this->on_before_add_to_cart_button();
+		remove_action( 'woocommerce_before_add_to_cart_form', array( $this, 'on_before_add_to_cart_form' ), 0 );
+		remove_action( 'woocommerce_after_add_to_cart_form', array( $this, 'on_after_add_to_cart_form' ), 998 );
+		$this->on_before_add_to_cart_form();
 	}
 
 	/**
 	 * Handles actions before displaying the add to cart button.
 	 */
-	public function on_before_add_to_cart_button() {
+	public function on_before_add_to_cart_form() {
 		global $product;
 
 		// Check if the product can't be purchased by the user.
@@ -420,16 +420,16 @@ class VHC_WC_CVO_Restrictions_Filters {
 	}
 
 	/**
-	 * Calls `on_after_add_to_cart_button` after displaying a single variation.
+	 * Calls `on_after_add_to_cart_form` after displaying a single variation.
 	 */
 	public function on_after_single_variation() {
-		$this->on_after_add_to_cart_button();
+		$this->on_after_add_to_cart_form();
 	}
 
 	/**
 	 * Handles actions after displaying the add to cart button.
 	 */
-	public function on_after_add_to_cart_button() {
+	public function on_after_add_to_cart_form() {
 		global $wc_cvo, $product;
 
 		// Check if the action was already executed.
